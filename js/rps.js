@@ -6,7 +6,7 @@ function getComputerChoice() {
     return compChoice;
 }
 
-function getPLayerChoice() {
+function getPlayerChoice() {
     let playerChoice = prompt("Please choose rock, paper, or scissors.");
     if (playerChoice.toLowerCase() === "paper") {
         alert("You chose paper.");
@@ -17,46 +17,57 @@ function getPLayerChoice() {
     }
     return playerChoice;
 }
+const draw = "It's a draw!";
+const playerWin = "You won! Congratulations!";
+const playerLose = "You lose! Better luck next time!"
 
-const playerSelection = getPLayerChoice();
-const computerSelection = getComputerChoice();
-
-
-function playRound(playerSelection, computerSelection){
+function playRound() {
+    const playerSelection = getPlayerChoice();
+    const computerSelection = getComputerChoice();
+    console.log("comp " + computerSelection)
+    console.log("player "+ playerSelection)
     if (playerSelection == computerSelection) {
-        alert("It's a draw!");
-        return "It's a draw!";
+        alert(draw);
+        return draw;
     } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        alert("You lose! Better luck next time!");
-        return "You lose! Better luck next time!";
+        alert(playerLose);
+        return playerLose;
     } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        alert("You won! Congratultions!");
-        return "You won! Congratultions!";
+        alert(playerWin);
+        return playerWin;
     } else if (playerSelection === "rock" && computerSelection === "paper") {
-        alert("You lose! Better luck next time!");
-        return "You lose! Better luck next time!";
+        alert(playerLose);
+        return playerLose;
     } else if (playerSelection === "paper" && computerSelection === "rock") {
-        alert("You won! Congratulations!");
-        return "You won! Congratulations!";
+        alert(playerWin);
+        return playerWin;
     } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        alert("You lose! Better luck next time!");
-        return "You lose! Better luck next time!";
+        alert(playerLose);
+        return playerLose;
     } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        alert("You won! Congratulations!");
-        return "You won! Congratulations!";
+        alert(playerWin);
+        return playerWin;
     }
 } 
 
+function game() {
+    let playerScore = 0
+    let computerScore = 0
+    for (let i = 0; i < 5; i++) {
+        let roundResult = playRound()
+        if (roundResult === playerWin) {
+            playerScore = playerScore + 1
+        } else if (roundResult === playerLose) {
+            computerScore = computerScore + 1
+        }
+    }
+    if (playerScore === computerScore) {
+        return "Draw!"
+    } else if (playerScore < computerScore) {
+        return "Computer Wins!"
+    } else if (playerScore > computerScore) {
+        return "Player Wins!"
+    }
+}
 
-
-
-/*
-function getComputerChoice will randomly return rock, paper, or scissors
-    choiceList = [rock, paper, scissors]
-    compChoice = choiceList[(Math.floor(Math.random()*choiceList.length))];
-
-
-*/
-
-console.log(computerSelection)
-console.log(playRound(playerSelection, computerSelection))
+console.log(game())
